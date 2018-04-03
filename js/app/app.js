@@ -27,133 +27,13 @@ app.controller('principal', function ($scope, $http, $rootScope) {
     };
   
 
-    $scope.listado_producto = function () {
-        for (var i = 0; i < $scope.sub_categorias.length; i++) {
-            var data = {
-                idSub_categoria: $scope.sub_categorias[i].idSub_categoria
+    
 
-            };
-            $http.post('server/producto/listado_producto.php', {'data': data}).success(
-                    function (data) {
-
-                        for (var j = 0; j < data.length; j++) {
-                            var producto = {
-                                class: 'cbp-item ',
-                                href: 'images/productos/' + data[j].imgProducto,
-                                imgProducto: 'images/productos/' + data[j].imgProducto,
-                                titulo: data[j].descProducto
-                            }
-                            $scope.productos.push(producto);
-                        }
-                    });
-        }
-    };
-
-    $scope.listado_subcategoria = function () {
-        for (var i = 0; i < $scope.categorias.length; i++) {
-            var data = {
-                idCategoria_pais: $scope.categorias[i].idCategoria_pais
-            };
-            $http.post('server/subcategoria/listado_subcategoria.php', {'data': data}).success(
-                    function (data) {
-                        $scope.sub_categorias = [];
-                        for (var j = 0; j < data.length; j++) {
-                            var sub_categoria = {
-                                idCategoria_pais: data[j].idCategoria_pais,
-                                data_filter: '.' + data[j].nombreSub_categoria,
-                                nombreSub_categoria: data[j].nombreSub_categoria,
-                                class: 'cbp-filter-item',
-                                categoria: data[j].nombreSub_categoria,
-                                idSub_categoria: data[j].idSub_categoria
-                            }
-                            $scope.sub_categorias.push(sub_categoria);
-                        }
-                        $scope.listado_producto();
-                    });
-        }
-    };
-
-    $scope.seleccionar_pais = function (jnPais) {
-        $scope.productos = [];
-        $scope.jnPais = jnPais;
-        var data = {
-            idPais: $scope.jnPais.idPais
-        };
-        $http.post('server/categoria/listado_categoria.php', {'data': data}).success(
-                function (data) {
-                    $scope.categorias = [];
-                    for (var i = 0; i < data.length; i++) {
-                        var categoria = {
-                            data_filter: '.' + data[i].nombreCategoria,
-                            class: 'cbp-filter-item2',
-                            categoria: data[i].nombreCategoria,
-                            idCategoria_pais: data[i].idCategoria_pais,
-                            categoria_switch: 0
-                        }
-                        $scope.categorias.push(categoria);
-                    }
-                    $scope.listado_subcategoria();
-                })
-    };
+    
 
 
 
-    $http.post('server/pais/listado_pais.php').success(
-            function (data) {
-                $scope.paises = data;
-                $scope.seleccionar_pais($scope.paises[0]);
-            });
-
-
-    // Begin: Menu
-    $scope.jnMenu = {
-        item1: 'Inicio',
-        item2: 'Nosotros',
-        item3: 'Productos',
-        item4: 'Servicios',
-        item5: 'Precios',
-        item6: 'Blog',
-        item7: 'Contacto'
-    };
-    // End: Menu
-    // Begin: Nosotros
-    $scope.nosotros = {
-        titulo: 'Asturias y Aragón mayorista especialista en juguetes',
-        descripcion: '<h5><b>Juguetes didácticos y puzzles. Mas de 15 años llevando diversión y educación a los niños y familias  con productos de calidad, entretenidos y que ayudan al desarrollo de lo niños. </b><h5>',
-        circulos: [
-            {
-                nombre: 'Ejemplo2',
-                icono: 'images/asturias/logo-welly.png',
-                delay_animation: 1000,
-                descripcion: 'Ejemplo de descripcion2'
-            },
-            {
-                nombre: 'Ejemplo2',
-                icono: 'images/asturias/logo-disney1.png',
-                delay_animation: 1000,
-                descripcion: 'Ejemplo de descripcion2'
-            },
-            {
-                nombre: 'Ejemplo2',
-                icono: 'images/asturias/logo-marvel1.png',
-                delay_animation: 1000,
-                descripcion: 'Ejemplo de descripcion2'
-            },
-            {
-                nombre: 'Ejemplo2',
-                icono: 'images/asturias/logo1.png',
-                delay_animation: 1000,
-                descripcion: 'Ejemplo de descripcion2'
-            }
-        ]
-    };
-    // End: Nosotros
-    // Begin: Portafolio
-    $scope.portafolio = {
-        titulo: 'Productos',
-        descripcion: '<h5><b class="white">El especialista en juegos, juguetes didácticos y puzzles. Mas de 15 años llevando diversión y educación a los niños y familias  con productos de calidad, entretenidos y que ayudan al desarrollo de lo niños. </b><h5>',
-        catalogo: 'Catálogo'
-    }
+   
 
     setTimeout(function () {
         (function ($) {
@@ -358,11 +238,7 @@ app.controller('principal', function ($scope, $http, $rootScope) {
     // End: Portafolio
 
     // Begin: Parallax
-    $scope.parallax = {
-        img1: 'imagenes/',
-        img2: 'Nosotros'
-    };
-    // End: Menu
+    
 
 
 });
